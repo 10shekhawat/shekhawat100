@@ -1,5 +1,7 @@
 const http = require('http');
 const fs = require('fs');
+const url = require("url");
+const querystring = require("querystring")
 
 
 const server = http.createServer((req, res) => {
@@ -14,15 +16,43 @@ const server = http.createServer((req, res) => {
           res.end('Internal Server Error');
           return;
         }
-        else{
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            const modifiedContent = data.replace('<%= name %>', 'John Doe');
-            res.end(modifiedContent);
+        else {
+            // res.writeHead(200, { 'Content-Type': 'text/html' });
+            // const modifiedContent = data.replace('hello', 'John Doe');
+            res.end(data);
         }
        
       });
    }
+//    else if(req.url === "/Submit"){
+//     let body = "";
+//     req.on("data",chunk=>{
+//       console.log(chunk.toString());
+//       body = chunk.toString();
+//     })
+//     //console.log(body);
+//     req.on("end",()=>{
+//       const formData = querystring.parse(body);
+//       console.log(formData);
+//        let Name = formData.name;
+//        let Email = formData.email;
 
+//        console.log(Name,Email);
+      
+//     })
+
+
+//     res.writeHead(200,{"Content-Type":"text/html"});
+//     res.end("submit");
+// }
+if(req.url=="/Submit")
+{
+  req.on("data",(data)=>{
+    res.end("done")
+    console.log(data.toString());
+  })
+}
+   
 
 });
 
